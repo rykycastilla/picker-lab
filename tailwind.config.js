@@ -47,8 +47,6 @@ module.exports = {
         },
         'system-bg': '#f5f5f7',
         'system-bg-dark': 'rgb(52, 52, 52)',
-        'system-sidebar': 'rgb(220, 220, 200)',
-        'system-sidebar-dark': 'rgb(74, 69, 60)',
         'system-border': 'rgb(207, 207, 207)',
         'system-border-dark': 'rgb(90, 90, 90)',
         'system-text': 'rgb(72, 72, 72)',

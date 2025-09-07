@@ -1,3 +1,109 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    color: rgb(72, 72, 72);
+  }
+  .dark body {
+    color: rgb(223, 223, 223);
+  }
+}
+
+@layer components {
+  .system-section {
+    background-color: rgb(235, 235, 235);
+    border-width: 1px;
+    border-style: solid;
+  }
+  .dark .system-section {
+    background-color: rgb(55, 55, 55);
+  }
+  /* Force section border colors (higher specificity to override utilities) */
+  .system-section.system-section { border-color: rgb(207, 207, 207); }
+  .dark .system-section.system-section { border-color: rgb(73, 73, 73); }
+  /* Horizontal rules inside sections */
+  .system-section hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    background-color: rgb(207, 207, 207);
+  }
+  .dark .system-section hr {
+    background-color: rgb(73, 73, 73);
+  }
+  /* Section titles */
+  h2.text-system-text { color: rgb(72,72,72); }
+  .dark h2.text-system-text { color: rgb(223,223,223); }
+  .system-button {
+    @apply px-4 py-2 rounded-lg border border-system-border dark:border-system-border-dark shadow-sm text-sm font-medium text-system-text dark:text-system-text-dark;
+    /* Neutral, saturated grays per light/dark palette */
+    background-color: rgb(246, 246, 246);
+  }
+  .dark .system-button {
+    background-color: rgb(60, 60, 60);
+  }
+  .system-button:hover { background-color: rgb(239, 239, 239); }
+  .dark .system-button:hover { background-color: rgb(55, 55, 55); }
+
+  .system-input {
+    @apply px-3 py-2 rounded-lg border border-system-border dark:border-system-border-dark outline-none transition-all duration-200 text-sm;
+    /* Neutral, saturated grays per light/dark palette */
+    background-color: rgb(246, 246, 246);
+    caret-color: rgb(72, 72, 72);
+  appearance: none;
+  -webkit-appearance: none;
+  }
+  .dark .system-input {
+    background-color: rgb(60, 60, 60);
+  }
+  .system-input:focus {
+    border-color: rgb(150, 150, 150);
+    box-shadow: 0 0 0 1px rgb(150, 150, 150);
+    outline: none;
+  }
+  .dark .system-input:focus {
+    border-color: rgb(160,160,160);
+    box-shadow: 0 0 0 1px rgb(160,160,160);
+  }
+  .system-input:focus-visible {
+    border-color: rgb(150,150,150);
+    box-shadow: 0 0 0 1px rgb(150,150,150);
+    outline: none;
+  }
+  .dark .system-input:focus-visible {
+    border-color: rgb(160,160,160);
+    box-shadow: 0 0 0 1px rgb(160,160,160);
+    outline: none;
+  }
+  .dark .system-input {
+    caret-color: rgb(223, 223, 223);
+  }
+  /* Selection color inside inputs */
+  .system-input::selection {
+    background-color: rgb(207, 207, 207);
+    color: rgb(0, 0, 0);
+  }
+  .dark .system-input::selection {
+    background-color: rgb(90, 90, 90);
+    color: rgb(255, 255, 255);
+  }
+
+  .system-sidebar-item {
+  @apply px-3 py-2 rounded-lg text-sm font-medium text-system-text dark:text-system-text-dark cursor-pointer;
+  }
+
+  .system-context-menu {
+    @apply absolute bg-white dark:bg-gray-800 border border-system-border dark:border-system-border-dark rounded-lg shadow-lg py-1 z-50 min-w-32;
+  }
+
+  .system-context-item {
+    @apply px-3 py-1.5 text-sm text-system-text dark:text-system-text-dark hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer;
+  }
+}

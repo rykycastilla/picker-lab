@@ -1,8 +1,12 @@
 import { defineConfig } from 'vite'
+import { resolve } from 'node:path'
 
 export default defineConfig( {
   resolve: {
-    alias: { '@': '/src/main' },
+    alias: {
+      '@': resolve( __dirname, 'src/main' ),
+      '@shared': resolve( __dirname, 'src/shared' ),
+    },
   },
   build: {
     // Let @electron-forge/plugin-vite control outDir (defaults to .vite/build)
