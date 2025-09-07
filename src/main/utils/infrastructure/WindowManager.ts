@@ -25,6 +25,7 @@ export abstract class WindowManager {
     const win: BrowserWindow = this.createStatefullWindow( {
       titleBarStyle: 'hiddenInset',
       vibrancy: 'under-window',
+      fullscreenable: true,
       webPreferences: { contextIsolation:true },
     } )
     if( DEVELOPMENT ) { win.loadURL( DEV_UI_SERVER ) }
