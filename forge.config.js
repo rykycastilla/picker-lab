@@ -20,6 +20,10 @@ const config = {
           entry: 'src/main/main.ts',
           config: 'vite.main.config.ts',
         },
+        {
+          entry: 'src/ui/index.ts',
+          config: 'vite.api.config.ts',
+        },
       ],
       renderer: [ { config:'vite.ui.config.ts' } ],
     } ),

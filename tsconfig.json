@@ -2,7 +2,9 @@
   "files": [],
   "references": [
     { "path": "./tsconfig.main.json" },
+    { "path": "./tsconfig.api.json" },
     { "path": "./tsconfig.ui.json" },
+    { "path": "./tsconfig.shared.json" },
     { "path": "./tsconfig.node.json" }
   ]
 }

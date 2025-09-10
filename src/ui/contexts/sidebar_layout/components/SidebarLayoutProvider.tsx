@@ -19,13 +19,17 @@ const SidebarLayoutProvider = ( props:SidebarLayoutProviderProps ): ReactElement
   const [ width, setWidth, loadingWidth ] = useStorageState( DEFAULT_SIDEBAR_WIDTH, 'sidebar-width' )
   const isWidthLoaded = usePromiseResolved( loadingWidth )
 
+  // Loading sidebar open state (state) from storage
+  const [ isOpen, setIsOpen, loadingIsOpen ] = useStorageState( true, 'sidebar-is-open' )
+  const isOpenLoaded = usePromiseResolved( loadingIsOpen )
+
   // Notifying when the width is loaded
   useEffect( () => {
-    if( isWidthLoaded ) { handleLoadStatic() }
-  }, [ isWidthLoaded, handleLoadStatic ] )
+    if( isWidthLoaded && isOpenLoaded ) { handleLoadStatic() }
+  }, [ isWidthLoaded, isOpenLoaded, handleLoadStatic ] )
 
   return (
-    <SidebarLayoutContext.Provider value={ { width, setWidth } }>
+    <SidebarLayoutContext.Provider value={ { isOpen, setIsOpen, width, setWidth } }>
       { children }
     </SidebarLayoutContext.Provider>
   )

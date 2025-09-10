@@ -1,0 +1,5 @@
+.sidebar-toggle {
+  transition-property: top, right, bottom, left;
+  transition-duration: 0.1s;
+  transition-timing-function: ease;
+}

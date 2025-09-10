@@ -1,14 +1,15 @@
 import Sidebar from './components/Sidebar'
+import SidebarToggle from './components/SidebarToggle'
 import SplitterHandler from './components/SplitterHandler'
+import TitleBar from './components/TitleBar'
 import { MAX_SIDEBAR_WIDTH, MIN_SIDEBAR_RENDER_WIDTH, MIN_SIDEBAR_WIDTH } from '@/constants'
 import { Outlet } from 'react-router-dom'
 import { ReactElement, useEffect, useRef, useState } from 'react'
-
-import { useSidebarWidth } from '@/contexts/sidebar_layout'
+import { useSidebarOpen, useSidebarWidth } from '@/contexts/sidebar_layout'
 
 const AppLayout = (): ReactElement => {
 
-  const sidebarOpen = true
+  const [ sidebarOpen ] = useSidebarOpen()
   const containerRef = useRef<HTMLDivElement|null>( null )
   const [ isResizing, setIsResizing ] = useState( false )
   const [ sidebarWidth, setSidebarWidth ] = useSidebarWidth()
@@ -27,7 +28,7 @@ const AppLayout = (): ReactElement => {
   return (
     <div className="h-screen font-sf">
       <div ref={ containerRef } className="relative flex h-full">
-        { canRenderSidebar && <Sidebar width={ sidebarWidth } isOpen={ sidebarOpen } /> }
+        { canRenderSidebar && <Sidebar width={ sidebarWidth } /> }
         { /* No-sidebar content overlay */ }
         <div
           className={ `absolute inset-0 z-20 flex flex-col min-w-0 bg-[rgb(239,239,239)] dark:bg-[rgb(52,52,52)] ${
@@ -45,6 +46,10 @@ const AppLayout = (): ReactElement => {
                 paneRef={ containerRef } />
             )
           }
+          <TitleBar
+            titleButtonsIncluded={ !canRenderSidebar || !sidebarOpen }
+            titleButtonsAmount={ canRenderSidebar ? 1 : 0 } />
+          { canRenderSidebar && <SidebarToggle /> }
           { /* Work Area */ }
           <main className="flex-1 overflow-auto p-6">
             <Outlet />
