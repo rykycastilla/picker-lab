@@ -3,6 +3,7 @@ import ElectronWindowState, { State } from 'electron-window-state'
 import { BrowserWindow, BrowserWindowConstructorOptions } from 'electron'
 import { FULL_SCREEN_NOTIFICATION, TITLE_BAR_HEIGHT } from '@shared/constants'
 import { resolve } from 'node:path'
+import { WindowEvent } from './WindowEvent'
 import { WindowEventEmitter } from './WindowEventEmitter'
 
 const {
@@ -54,8 +55,11 @@ export class WindowLauncher {
       win.webContents.send( FULL_SCREEN_NOTIFICATION, false )
     } )
     // Notifying the init (saved) state
-    const isFullScreen: boolean = win.isFullScreen()
-    win.webContents.send( FULL_SCREEN_NOTIFICATION, isFullScreen )
+    this.emitter.addEventListener( 'load', ( event:WindowEvent ) => {
+      if( win !== event.window ) { return }
+      const isFullScreen: boolean = win.isFullScreen()
+      win.webContents.send( FULL_SCREEN_NOTIFICATION, isFullScreen )
+    } )
   }
 
   /**
@@ -74,10 +78,10 @@ export class WindowLauncher {
         contextIsolation: true,
       },
     } )
-    this.emitter.setLoadEventFor( win )
     // Setting window
-    await this.loadContent( win )
+    this.emitter.setLoadEventFor( win )
     this.setFullScreenListeners( win )
+    await this.loadContent( win )
   }
 
 }
