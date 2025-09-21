@@ -3,15 +3,15 @@ import { EventDispatcher } from '@shared/utils/EventDispatcher'
 import { WindowEvent } from './WindowEvent'
 
 export class WindowEventEmitter extends EventDispatcher<CreateWindowListener> {
-
-  public notifyCreation( window:BrowserWindow ) {
-    const timeStamp = Date.now()
-    this.dispatch( 'create', { window, timeStamp } )
+  public setLoadEventFor( window:BrowserWindow ) {
+    window.webContents.addListener( 'did-finish-load', () => {
+      const timeStamp = Date.now()
+      this.dispatch( 'load', { window, timeStamp } )
+    } )
   }
-
 }
 
 interface CreateWindowListener {
-  type: 'create'
+  type: 'load'
   handle( event:WindowEvent ): Promise<void> | void
 }

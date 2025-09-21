@@ -1,6 +1,6 @@
 import { AccentEvent } from '@shared/modules/ui_color_checker/application'
 import { MAIN_ACCENT_COLOR } from '@/constants'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useLayoutEffect, useMemo, useState } from 'react'
 
 /**
  * Provides a dynamic accent color
@@ -18,7 +18,7 @@ export function useAccentColor(): string | null {
     setSystemAccent( event.value )
   }, [] )
 
-  useEffect( () => {
+  useLayoutEffect( () => {
     api.addEventListener( 'accent', handleAccentUpdate )
     return () => api.removeEventListener( 'accent', handleAccentUpdate )
   }, [ handleAccentUpdate ] )

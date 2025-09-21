@@ -16,8 +16,8 @@ async function getAccentLoaded(): Promise<string|null> {
  * Handles the color updates to the UI when config changes are detected.
  */
 export function runColorCheckerService() {
-  // Sending the first value when the window is created
-  WindowManager.addEventListener( 'create', async( event:WindowEvent ) => {
+  // Sending the first value when the window is created (or reloaded)
+  WindowManager.addEventListener( 'load', async( event:WindowEvent ) => {
     const accent: string | null = await getAccentLoaded()
     updateAccent( event.window, accent )
   } )

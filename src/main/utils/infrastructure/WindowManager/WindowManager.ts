@@ -21,15 +21,16 @@ export abstract class WindowManager {
    * Appends an event listener for events whose type attribute
    * value is type. The callback argument sets the handler that
    * will be invoked when the event is dispatched.
+   * @param type  `load` is dispatched when a window is created or reloaded
    */
-  public static addEventListener( type:'create', handle:( event:WindowEvent ) => Promise<void>|void ) {
+  public static addEventListener( type:'load', handle:( event:WindowEvent ) => Promise<void>|void ) {
     WindowManager.emitter.addEventListener( type, handle )
   }
 
   /**
    * Removes the event listener in target's event listener list with the same type and callback
    */
-  public static removeEventListener( type:'create', handle:( event:WindowEvent ) => Promise<void>|void ) {
+  public static removeEventListener( type:'load', handle:( event:WindowEvent ) => Promise<void>|void ) {
     WindowManager.emitter.removeEventListener( type, handle )
   }
 

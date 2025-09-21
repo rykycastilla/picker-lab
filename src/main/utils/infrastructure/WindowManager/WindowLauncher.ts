@@ -74,10 +74,10 @@ export class WindowLauncher {
         contextIsolation: true,
       },
     } )
+    this.emitter.setLoadEventFor( win )
     // Setting window
     await this.loadContent( win )
     this.setFullScreenListeners( win )
-    this.emitter.notifyCreation( win )
   }
 
 }
