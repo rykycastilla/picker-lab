@@ -1,5 +1,6 @@
-import { App, AppLayout } from '@/views/app'
-import { HashRouter, Routes, Route } from 'react-router-dom'
+import { AppLayout } from '@/views/app'
+import { HashRouter, Navigate, Routes, Route } from 'react-router-dom'
+import { Lab } from '@/views/lab'
 import { ReactElement } from 'react'
 
 const Router = (): ReactElement => {
@@ -7,7 +8,9 @@ const Router = (): ReactElement => {
     <HashRouter>
       <Routes>
         <Route element={ <AppLayout /> }>
-          <Route index element={ <App /> } />
+          { /* Using '/lab' as index */ }
+          <Route index element={ <Navigate to="/lab" replace /> } />
+          <Route path="lab" element={ <Lab /> } />
         </Route>
       </Routes>
     </HashRouter>

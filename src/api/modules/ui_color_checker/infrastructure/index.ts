@@ -1,0 +1,1 @@
+export { AccentIPCDispatcher } from './AccentIPCDispatcher'

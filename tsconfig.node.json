@@ -13,13 +13,15 @@
     "moduleDetection": "force",
     "noEmit": true,
 
+    /* JavaScript */
+    "allowJs": true,
+    "checkJs": true,
+
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": [ "vite.main.config.ts", "vite.ui.config.ts" ]
+  "include": [ "vite.main.config.ts", "vite.ui.config.ts", "libs/node/", "scripts/" ]
 }

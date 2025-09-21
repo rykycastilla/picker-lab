@@ -1,0 +1,1 @@
+export { AccentEvent } from './AccentEvent'

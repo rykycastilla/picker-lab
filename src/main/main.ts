@@ -1,9 +1,11 @@
 import { app } from 'electron'
 import { Platform, PlatformService } from '@/utils/Platform'
+import { runColorCheckerService } from '@/modules/ui_color_checker/infrastructure'
 import { WindowManager } from '@/utils/infrastructure/WindowManager'
 
-function main() {
-  WindowManager.launch()
+async function main() {
+  runColorCheckerService()
+  await WindowManager.launch()
 }
 
 // Keeping alive in MacOS (even closing windows)

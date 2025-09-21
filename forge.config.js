@@ -7,6 +7,7 @@ const config = {
     asar: true,
     prune: true,
     icon: './assets/icons/icon',
+    extraResource: [ 'bin' ],
   },
   rebuildConfig: {},
   makers: [

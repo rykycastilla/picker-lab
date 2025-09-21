@@ -12,3 +12,9 @@ export const MIN_SIDEBAR_RENDER_WIDTH = 680
 
 /** Placeholder for the `width` of the MacOS traffic lights */
 export const TRAFFIC_LIGHTS_PLACEHOLDER = 72
+
+/** Opacity for UI elements that should be unfocused when the MacOS window loses focus */
+export const WINDOW_BLUR_UI_OPACITY = 0.6
+
+/** Accent color of the app (by default) */
+export const MAIN_ACCENT_COLOR = '#756ED5'

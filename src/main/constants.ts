@@ -22,3 +22,7 @@ export const MIN_WINDOW_WIDTH = 400
 
 /** Minimu height of the main window */
 export const MIN_WINDOW_HEIGHT = MIN_WINDOW_WIDTH + TITLE_BAR_HEIGHT
+
+export const BIN_PATH = DEVELOPMENT
+  ? resolve( APP_PATH, 'bin' )
+  : resolve( process.resourcesPath, 'bin' )

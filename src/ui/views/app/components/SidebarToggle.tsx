@@ -2,7 +2,7 @@ import sidebarDark from '@assets/icons/sidebar_dark.svg'
 import sidebarLight from '@assets/icons/sidebar_light.svg'
 import { ReactElement } from 'react'
 import { TITLE_BAR_HEIGHT } from '@shared/constants'
-import { TRAFFIC_LIGHTS_PLACEHOLDER} from '@/constants'
+import { TRAFFIC_LIGHTS_PLACEHOLDER, WINDOW_BLUR_UI_OPACITY } from '@/constants'
 import { useFullScreen } from '@/hooks/full_screen'
 import { useSidebarOpen } from '@/contexts/sidebar_layout'
 import { useWindowDragArea } from '../hooks/window_drag_area'
@@ -24,7 +24,7 @@ const SidebarToggle = (): ReactElement => {
       style={ {
         height: TITLE_BAR_HEIGHT,
         left: isFullScreen ? 0 : TRAFFIC_LIGHTS_PLACEHOLDER,  // Reserving space for traffic lights in window mode
-        opacity: hasFocus ? 1 : 0.6,
+        opacity: hasFocus ? 1 : WINDOW_BLUR_UI_OPACITY,
       } }>
       <button
         onClick={ handleToggle}
