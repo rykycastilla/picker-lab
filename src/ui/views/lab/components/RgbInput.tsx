@@ -1,22 +1,30 @@
 import Input from '@/components/Input'
-import { ReactElement } from 'react'
+import { ReactElement, useEffect } from 'react'
 import { Stream, useNumericInputStream } from '../hooks/numeric_input_stream'
+import { useRgb } from '@/contexts/selected_color'
 
 const MAX_RGB_CHANEL_LENGTH = 3
 const RGB_CHANEL_PATTERN = '^(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])$'
 
 const RgbInput = (): ReactElement => {
 
+  const [ , setRgb ] = useRgb()
   const redStream = useNumericInputStream( 'R', '255' )
   const greenStream = useNumericInputStream( 'G', '0' )
   const blueStream = useNumericInputStream( 'B', '0' )
-  const colorStreamList: Stream[] = [ redStream, greenStream, blueStream ]
+
+  useEffect( () => {
+    const red: number = redStream.value
+    const green: number = greenStream.value
+    const blue: number = blueStream.value
+    setRgb( { red, green, blue } )
+  }, [ redStream, greenStream, blueStream, setRgb ] )
 
   return (
     <div>
       <label className="block text-sm font-medium text-system-text dark:text-system-text-dark mb-2">RGB</label>
       <div className="grid grid-cols-3 gap-6">
-        { colorStreamList.map( ( rgbChanel ) => {
+        { [ redStream, greenStream, blueStream ].map( ( rgbChanel:Stream ) => {
           const { target, rawValue, setRawValue, setIsValid } = rgbChanel
           return (
             <Input

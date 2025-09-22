@@ -18,3 +18,6 @@ export const WINDOW_BLUR_UI_OPACITY = 0.6
 
 /** Accent color of the app (by default) */
 export const MAIN_ACCENT_COLOR = '#756ED5'
+
+/** Id for the title bar (in work area side) */
+export const WORK_AREA_TITLE_BAR = 'work-area-title-bar'

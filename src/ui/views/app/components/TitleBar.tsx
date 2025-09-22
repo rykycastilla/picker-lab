@@ -3,6 +3,7 @@ import { ReactElement } from 'react'
 import { TITLE_BAR_HEIGHT } from '@shared/constants'
 import { useWindowDragArea } from '../hooks/window_drag_area'
 import { useWindowFocus } from '@/hooks/window_focus'
+import { WORK_AREA_TITLE_BAR } from '@/constants'
 
 interface TitleBarProps {
   titleButtonsIncluded: boolean
@@ -24,10 +25,11 @@ const TitleBar = ( props:TitleBarProps ): ReactElement => {
         '--title-bar-dark-bg': darkBgColor,
         '--title-bar-light-bg': lightBgColor,
       } as object }>
-      <div className="h-full flex items-center gap-2">
-        <div id="workarea-topbar" className="flex items-center gap-2">
-          { titleButtonsIncluded && <SidebarTitleButtonsPlaceholder buttonsAmount={ titleButtonsAmount } /> }
-        </div>
+      <div className="h-full flex items-center">
+        { titleButtonsIncluded && (
+          <SidebarTitleButtonsPlaceholder buttonsAmount={ titleButtonsAmount } />
+        ) }
+        <div id={ WORK_AREA_TITLE_BAR } className="flex items-center gap-2" />
       </div>
     </div>
   )
