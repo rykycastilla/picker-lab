@@ -1,11 +1,11 @@
-import { useLayoutEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 export interface Stream {
   target: string
   value: number
   rawValue: string
   setRawValue( rawValue:string ): void
-  setIsValid( isValid:boolean ): void
+  setValidValue( validValue:string ): void
 }
 
 /**
@@ -16,18 +16,16 @@ export interface Stream {
  */
 export function useNumericInputStream( target:string, defaultValue:string ): Stream {
 
-  const [ value, setValue ] = useState( NaN )
   const [ rawValue, setRawValue ] = useState( defaultValue )
-  const [ isValid, setIsValid ] = useState( false )
+  const [ validValue, setValidValue ] = useState<string|null>( null )
 
   // Creating numeric value if it is valid
-  useLayoutEffect( () => {
-    if( !isValid ) { return }
-    setValue( Number( rawValue ) )
-  }, [ rawValue, isValid ] )
+  const value = useMemo<number>( () => {
+    return validValue === null ? NaN : Number( validValue )
+  }, [ validValue ] )
 
   return useMemo<Stream>( () => {
-    return { target, value, rawValue, setRawValue, setIsValid }
-  }, [ target, value, rawValue, setRawValue, setIsValid ] )
+    return { target, value, rawValue, setRawValue, setValidValue }
+  }, [ target, value, rawValue, setRawValue, setValidValue ] )
 
 }

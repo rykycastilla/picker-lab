@@ -8,32 +8,44 @@ const RGB_CHANEL_PATTERN = '^(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])$'
 
 const RgbInput = (): ReactElement => {
 
-  const [ , setRgb ] = useRgb()
-  const redStream = useNumericInputStream( 'R', '255' )
-  const greenStream = useNumericInputStream( 'G', '0' )
-  const blueStream = useNumericInputStream( 'B', '0' )
+  const [ rgb, setRgb ] = useRgb()
+  const redStream = useNumericInputStream( 'R', String( rgb.red ) )
+  const greenStream = useNumericInputStream( 'G', String( rgb.green ) )
+  const blueStream = useNumericInputStream( 'B', String( rgb.blue ) )
 
+  // Updating rgb fields when another field updates the color
   useEffect( () => {
-    const red: number = redStream.value
-    const green: number = greenStream.value
-    const blue: number = blueStream.value
+    const { red, green, blue } = rgb
+    redStream.setRawValue( String( red ) )
+    greenStream.setRawValue( String( green ) )
+    blueStream.setRawValue( String( blue ) )
+  }, [ rgb ] )  // eslint-disable-line
+
+  const red: number = redStream.value
+  const green: number = greenStream.value
+  const blue: number = blueStream.value
+
+  // Updating rgb changes in global color
+  useEffect( () => {
+    if( isNaN( red ) || isNaN( green ) || isNaN( blue ) ) { return }
     setRgb( { red, green, blue } )
-  }, [ redStream, greenStream, blueStream, setRgb ] )
+  }, [ red, green, blue, setRgb ] )
 
   return (
     <div>
       <label className="block text-sm font-medium text-system-text dark:text-system-text-dark mb-2">RGB</label>
       <div className="grid grid-cols-3 gap-6">
         { [ redStream, greenStream, blueStream ].map( ( rgbChanel:Stream ) => {
-          const { target, rawValue, setRawValue, setIsValid } = rgbChanel
+          const { target, rawValue, setRawValue, setValidValue } = rgbChanel
           return (
             <Input
               key={ target }
               name={ target }
               maxLength={ MAX_RGB_CHANEL_LENGTH }
               pattern={ RGB_CHANEL_PATTERN }
+              onlyKeepValid
               value={ rawValue } onValueChange={ setRawValue }
-              onIsValidChange={ setIsValid } />
+              onValidValueChange={ setValidValue } />
           )
         } ) }
       </div>
