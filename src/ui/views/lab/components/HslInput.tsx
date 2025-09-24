@@ -34,7 +34,7 @@ const HslInput = (): ReactElement => {
 
   return (
     <div>
-      <label className="block text-sm font-medium text-system-text dark:text-system-text-dark mb-2">RGB</label>
+      <label className="block text-sm font-medium text-system-text dark:text-system-text-dark mb-2">HSL</label>
       <div className="grid grid-cols-3 gap-6">
         { [ hueStream, saturationStream, lightnessStream ].map( ( hslChannel:Stream ) => {
           const { target, rawValue, setRawValue, setValidValue } = hslChannel
