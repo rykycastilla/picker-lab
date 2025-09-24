@@ -4,7 +4,7 @@ import { Stream, useNumericInputStream } from '../hooks/numeric_input_stream'
 import { useHsl } from '@/contexts/selected_color'
 
 const MAX_CHANEL_LENGTH = 3
-const DEGREES_PATTERN = '^(0|[1-9]|[1-9][0-9]|[1-2][0-9]{2}|3[0-5][0-9]|360)$'
+const DEGREES_PATTERN = '^(?:[0-9]|[1-9][0-9]|[12][0-9]{2}|3[0-5][0-9])$'
 const PERCENTAGE_PATTERN = '^(0|[1-9][0-9]?|100)$'
 
 const HslInput = (): ReactElement => {
