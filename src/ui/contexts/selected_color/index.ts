@@ -1,4 +1,6 @@
 export { default as SelectedColorProvider } from './components/SelectedColorProvider'
 export { useHex } from './hooks/hex'
+export { useHsl } from './hooks/hsl'
 export { useRgb } from './hooks/rgb'
+export type { HSL } from './domain/HSL'
 export type { RGB } from './domain/RGB'

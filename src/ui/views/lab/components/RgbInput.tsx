@@ -35,8 +35,8 @@ const RgbInput = (): ReactElement => {
     <div>
       <label className="block text-sm font-medium text-system-text dark:text-system-text-dark mb-2">RGB</label>
       <div className="grid grid-cols-3 gap-6">
-        { [ redStream, greenStream, blueStream ].map( ( rgbChanel:Stream ) => {
-          const { target, rawValue, setRawValue, setValidValue } = rgbChanel
+        { [ redStream, greenStream, blueStream ].map( ( rgbChannel:Stream ) => {
+          const { target, rawValue, setRawValue, setValidValue } = rgbChannel
           return (
             <Input
               key={ target }
