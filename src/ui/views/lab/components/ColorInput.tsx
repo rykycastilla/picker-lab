@@ -8,9 +8,11 @@ const ColorInput = (): ReactElement => {
   return (
     <Section title="Color Input">
       <div className="space-y-6">
-        <div className="grid grid-cols-1 lg:grid-row-2 gap-6">
-          <RgbInput />
-          <HslInput />
+        <div className="grid grid-cols-1 lg:grid-col-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <RgbInput />
+            <HslInput />
+          </div>
           <HexInput />
         </div>
       </div>
