@@ -1,7 +1,8 @@
 import { compareHex } from '../infrastructure/compare_hex'
 import { compareHsl } from '../infrastructure/compare_hsl'
 import { compareRgb } from '../infrastructure/compare_rgb'
-import { ReactElement, ReactNode, useState } from 'react'
+import { NULL_RGB } from '../constants'
+import { ReactElement, ReactNode, useEffect } from 'react'
 import { RGB } from '../domain/RGB'
 import { RgbCodec } from '../infrastructure/RgbCodec'
 import { RgbHexCodec } from '../infrastructure/RgbHexCodec'
@@ -11,27 +12,45 @@ import { useAlternativeSpectrum } from '../hooks/alternative_spectrum'
 import { useColorSetter } from '../hooks/color_setter'
 import { useHslCache } from '../hooks/hsl_cache'
 import { useRgbCodec } from '../hooks/rgb_codec'
+import { useStaticCallback } from '@/hooks/static_callback'
+import { useStorageState } from '@/hooks/storage_state'
 
 interface SelectedColorProviderProps {
   children: ReactNode
+  onLoad?(): void
 }
 
 const SelectedColorProvider = ( props:SelectedColorProviderProps ): ReactElement => {
 
-  const { children } = props
-  const [ rgb, setRgb ] = useState<RGB>( { red:255, green:0, blue:0 } )
+  const { children, onLoad:handleLoad = () => {} } = props
+  const handleLoadStatic = useStaticCallback( handleLoad )
+
+  // Setting RGB (standard value to be stored)
+  const [ rgb, setRgb, loadingRgb ] = useStorageState<RGB>( NULL_RGB, 'selected-color' )
   const rgbCodec = useRgbCodec( RgbCodec )
-  const rgbHexCodec = useRgbCodec( RgbHexCodec )
-  const rgbHslCodec = useRgbCodec( RgbHslCodec )
-  const hex = useAlternativeSpectrum( rgb, rgbHexCodec )
-  const setHex = useColorSetter( hex, rgbHexCodec, compareHex, setRgb )
   const setRgbValue = useColorSetter( rgb, rgbCodec, compareRgb, setRgb )
 
+  // Setting hex value
+  const rgbHexCodec = useRgbCodec( RgbHexCodec )
+  const hex = useAlternativeSpectrum( rgb, rgbHexCodec )
+  const setHex = useColorSetter( hex, rgbHexCodec, compareHex, setRgb )
+
   // Setting hsl to keep wrong hsl values, ex: hsl( 4 0 0 )
+  const rgbHslCodec = useRgbCodec( RgbHslCodec )
   const internalHsl = useAlternativeSpectrum( rgb, rgbHslCodec )
   const setInternalHsl = useColorSetter( internalHsl, rgbHslCodec, compareHsl, setRgb )
   // Caching true hsl input
-  const [ hsl, setHsl ] = useHslCache( rgb, internalHsl, setInternalHsl, rgbHslCodec )
+  const [ hsl, setHsl, loadingHslInput ] = useHslCache( rgb, internalHsl, setInternalHsl, rgbHslCodec )
+
+  // Notifying loading event
+  useEffect( () => {
+    const handleLoad = async() => {
+      await loadingRgb
+      await loadingHslInput
+      handleLoadStatic()
+    }
+    handleLoad()
+  }, [ loadingRgb, loadingHslInput, handleLoadStatic ] )
 
   return (
     <SelectedColorContext.Provider value={ {

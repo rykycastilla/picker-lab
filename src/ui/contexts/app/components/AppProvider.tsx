@@ -9,13 +9,15 @@ interface AppProviderProps {
 
 const AppProvider = ( props:AppProviderProps ): ReactElement => {
   const { children } = props
-  const [ loaded, setLoaded ] = useState( false )
+  const [ sidebarLayoutLoaded, setSidebarLayoutLoaded ] = useState( false )
+  const [ selectedColorLoaded, setSelectedColorLoaded ] = useState( false )
   const accentColor = useAccentColor()
+  const loaded: boolean = sidebarLayoutLoaded && selectedColorLoaded && ( accentColor !== null )
   return (
-    <SidebarLayoutProvider onLoad={ () => setLoaded( true ) }>
-      <SelectedColorProvider>
+    <SidebarLayoutProvider onLoad={ () => setSidebarLayoutLoaded( true ) }>
+      <SelectedColorProvider onLoad={ () => setSelectedColorLoaded( true ) }>
         { /* Rendering UI after sidebar layout load ends and after system accent load */ }
-        { ( loaded && ( accentColor !== null ) ) && children }
+        { loaded && children }
       </SelectedColorProvider>
     </SidebarLayoutProvider>
   )
