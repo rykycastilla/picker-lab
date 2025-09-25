@@ -7,6 +7,13 @@ import { useStorageState } from '@/hooks/storage_state'
 
 type HslSetter = ( hsl:HSL ) => void
 
+/**
+ * Hook to manage and cache an HSL value based on a given RGB,
+ * syncing with a persistent state.
+ * It should be use to keep showing wrong hsl values if the rgb result is the same
+ * @example hsl( 4 0 0 ) == hsl( 0 0 0 ) // first would be auto translated to second without it
+ * @returns Tuple with `getter`, `setter` and a loading promise
+ */
 export function useHslCache( rgb:RGB, internalHsl:HSL, setInternalHsl:HslSetter, codec:RgbCodec<HSL> ): [ HSL, ( hsl:HSL ) => void, Promise<void> ] {
 
   const [ hslInput, setHslInput, loadingHslInput ] = useStorageState<HSL|null>( null, 'hsl-input' )
