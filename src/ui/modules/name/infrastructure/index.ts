@@ -1,0 +1,1 @@
+export { ColorNamer } from './ColorNamer'
