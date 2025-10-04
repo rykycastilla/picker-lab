@@ -21,7 +21,7 @@ export class ColorNamer implements ColorNameService {
     const isInRange: boolean = this.checkColorRange( red, green, blue )
     if( !isInRange ) { return ColorNamer.UNKNOWN }
     // Building color code and searching name
-    const rgb = `rgb( ${ red } ${ green }, ${ blue } )`
+    const rgb = `rgb( ${ red }, ${ green }, ${ blue } )`
     const { html } = namer( rgb )
     // Using the most similar color founded
     const [ mostSimilarColor ] = html

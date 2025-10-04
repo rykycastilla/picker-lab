@@ -1,0 +1,1 @@
+export { PaletteController } from './PaletteController'
