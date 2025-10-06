@@ -17,7 +17,7 @@ export default defineConfig( {
       fileName: () => 'main.cjs',
     },
     rollupOptions: {
-      external: [ 'electron' ],
+      external: [ 'electron', 'better-sqlite3' ],
     },
     minify: false,
   },

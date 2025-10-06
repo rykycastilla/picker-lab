@@ -2,19 +2,28 @@ import { FusesPlugin } from '@electron-forge/plugin-fuses'
 import { FuseV1Options, FuseVersion } from '@electron/fuses'
 import { VitePlugin } from '@electron-forge/plugin-vite'
 
+const includeList = [ 'node_modules', 'bin', 'database', '.vite', 'package.json' ]
+
 const config = {
   packagerConfig: {
-    asar: true,
     prune: true,
     icon: './assets/icons/icon',
-    extraResource: [ 'bin' ],
+    /**
+     * @param { string } path
+     */
+    ignore( path ) {
+      if( path === '' ) { return false }
+      for( const include of includeList ) {
+        if( path.startsWith( `/${ include }` ) ) { return false }
+      }
+      return true
+    },
   },
   rebuildConfig: {},
   makers: [
     { name: '@electron-forge/maker-dmg', platforms:[ 'darwin' ], config: { format:'ULFO' } },
   ],
   plugins: [
-    { name: '@electron-forge/plugin-auto-unpack-natives', config: {} },
     new VitePlugin( {
       build: [
         {
@@ -35,7 +44,6 @@ const config = {
       [ FuseV1Options.EnableNodeOptionsEnvironmentVariable ]: false,
       [ FuseV1Options.EnableNodeCliInspectArguments ]: false,
       [ FuseV1Options.EnableEmbeddedAsarIntegrityValidation ]: true,
-      [ FuseV1Options.OnlyLoadAppFromAsar ]: true,
     } ),
   ],
 }
