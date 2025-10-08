@@ -1,4 +1,5 @@
 import { AccentEmitter } from './modules/ui_color_checker/application'
+import { ISqlite } from '@shared/modules/sqlite/application'
 
 export interface ApiController extends AccentEmitter {
 
@@ -12,5 +13,10 @@ export interface ApiController extends AccentEmitter {
    * @returns color code (`string`), invalid or multicolor (`null`) or not provided yet (`undefined`)
    */
   getUiAccent(): string | null | undefined
+
+  /**
+   * Utility to use the SQLite database
+   */
+  sqlite: ISqlite
 
 }

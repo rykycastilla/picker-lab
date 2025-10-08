@@ -11,6 +11,7 @@
     "allowImportingTsExtensions": true,
     "moduleDetection": "force",
     "noEmit": true,
+    "experimentalDecorators": true,
 
     /* Linting */
     "strict": true,

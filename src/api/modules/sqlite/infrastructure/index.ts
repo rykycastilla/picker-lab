@@ -1,0 +1,1 @@
+export { SqliteIpcCommunicator } from './SqliteIpcCommunicator'

@@ -1,10 +1,12 @@
 import { app } from 'electron'
 import { Platform, PlatformService } from '@/utils/Platform'
 import { runColorCheckerService } from '@/modules/ui_color_checker/infrastructure'
+import { runSqliteApiManagerService } from '@/modules/sqlite/infrastructure'
 import { WindowManager } from '@/utils/infrastructure/WindowManager'
 
 async function main() {
   runColorCheckerService()
+  runSqliteApiManagerService()
   await WindowManager.launch()
 }
 
