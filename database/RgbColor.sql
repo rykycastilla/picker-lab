@@ -4,5 +4,5 @@ CREATE TABLE IF NOT EXISTS RgbColor (
     red INT NOT NULL,
     green INT NOT NULL,
     blue INT NOT NULL,
-    palette TEXT
+    palette TEXT NOT NULL
 )
