@@ -1,13 +1,23 @@
 import { app } from 'electron'
+import { ElectronAppMenuSetter, ElectronMenu } from '@/modules/menu/infrastructure'
 import { Platform, PlatformService } from '@/utils/Platform'
+import { runAppMenuService } from '@/modules/menu/application'
 import { runColorCheckerService } from '@/modules/ui_color_checker/infrastructure'
 import { runSqliteApiManagerService } from '@/modules/sqlite/infrastructure'
 import { WindowManager } from '@/utils/infrastructure/WindowManager'
 
 async function main() {
+
   runColorCheckerService()
   runSqliteApiManagerService()
+
+  // Setting App Menu
+  const appMenuSetter = new ElectronAppMenuSetter()
+  runAppMenuService( ElectronMenu, appMenuSetter )
+
+  // Creating first window
   await WindowManager.launch()
+
 }
 
 // Keeping alive in MacOS (even closing windows)

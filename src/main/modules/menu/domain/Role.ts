@@ -1,0 +1,14 @@
+export enum Role {
+  APP_MENU,
+  CLOSE,
+  UNDO,
+  REDO,
+  CUT,
+  COPY,
+  PASTE,
+  SELECT_ALL,
+  RELOAD,
+  TOGGLE_DEV_TOOLS,
+  TOGGLE_FULL_SCREEN,
+  WINDOW_MENU,
+}
