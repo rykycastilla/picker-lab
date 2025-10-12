@@ -20,4 +20,11 @@ export class WindowStore {
     return windowList.length
   }
 
+  /**
+   * Current focused window
+   */
+  public get focusedWindow(): BrowserWindow | null {
+    return BrowserWindow.getFocusedWindow()
+  }
+
 }

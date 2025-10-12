@@ -1,4 +1,5 @@
 import { AppMenuSetter } from './AppMenuSetter'
+import { Dependencies } from './Dependencies'
 import { EditMenu } from '../application/EditMenu'
 import { FileMenu } from '../application/FileMenu'
 import { Menu } from '../domain/Menu'
@@ -13,11 +14,11 @@ interface MenuServiceConstructor<T extends MenuService> {
 }
 
 export function runAppMenuService<T extends MenuService>(
-  MenuService:MenuServiceConstructor<T>, appMenuSetter:AppMenuSetter<T>,
+  MenuService:MenuServiceConstructor<T>, appMenuSetter:AppMenuSetter<T>, dependencies:Dependencies,
 ): T {
   const menuService = new MenuService(
     new StandardMenuItem( Role.APP_MENU ),
-    new FileMenu(), new EditMenu(), new ViewMenu(),
+    new FileMenu( dependencies ), new EditMenu(), new ViewMenu(),
     new StandardMenuItem( Role.WINDOW_MENU ),
   )
   appMenuSetter.set( menuService )

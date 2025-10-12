@@ -5,9 +5,9 @@ import { StandardMenuItem } from '../domain/StandardMenuItem'
 
 export class EditMenu extends Menu {
 
-  public readonly label = 'Edit'
+  public readonly name = 'Edit'
 
-  public readonly submenu = [
+  public readonly content = [
     new StandardMenuItem( Role.UNDO ),
     new StandardMenuItem( Role.REDO ),
     new Separator(),

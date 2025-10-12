@@ -7,10 +7,13 @@ export abstract class ActionMenuItem<T extends object = object> {
   public readonly id: string | undefined
 
   /** Item name */
-  public abstract readonly label: string
+  public abstract readonly name: string
+
+  /** Keyboard shortcuts to activate this item */
+  public readonly shortcuts: string[] | undefined
 
   /** Represents dependencies */
-  protected readonly context: T | undefined
+  protected readonly context: T
 
   constructor()
   constructor( id:string )
@@ -22,15 +25,17 @@ export abstract class ActionMenuItem<T extends object = object> {
       string | T | undefined,
       T | undefined,
     ]
+    let context: T | undefined
     if( typeof first === 'string' ) {
       this.id = first
-      this.context = second
+      context = second
     }
     else {
-      this.context = first
+      context = first
     }
+    this.context = context ?? {} as T
   }
 
-  public abstract click(): void
+  public abstract onSelect(): Promise<void> | void
 
 }

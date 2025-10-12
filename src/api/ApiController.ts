@@ -1,7 +1,10 @@
-import { AccentEmitter } from './modules/ui_color_checker/application'
+import { AccentListener } from './modules/ui_color_checker/application'
+import { EventDispatcher } from '@shared/utils/EventDispatcher'
 import { ISqlite } from '@shared/modules/sqlite/application'
+import { PublicOf } from '@shared/types/PublicOf'
+import { ShouldSaveColorListener } from './modules/color/application'
 
-export interface ApiController extends AccentEmitter {
+export interface ApiController extends SystemEmitter {
 
   /**
    * Says if the window is in full screen mode
@@ -20,3 +23,5 @@ export interface ApiController extends AccentEmitter {
   sqlite: ISqlite
 
 }
+
+type SystemEmitter = PublicOf<EventDispatcher<AccentListener|ShouldSaveColorListener>>

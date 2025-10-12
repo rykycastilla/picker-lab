@@ -1,14 +1,16 @@
 import { Menu as SubMenu } from '../domain/Menu'
-import { Menu, MenuItem as ElectronMenuItem } from 'electron'
+import { Menu, MenuItem as ElectronMenuItem, MenuItemConstructorOptions } from 'electron'
 import { MenuItem } from '../domain/MenuItem'
 import { MenuService } from '../application/MenuService'
+import { toElectronMenu } from './to_electron_menu'
 
 export class ElectronMenu<T extends object = object> implements MenuService {
 
   private readonly target: Menu
 
   constructor( ...subMenuList:Array<SubMenu<T>|MenuItem<T>> ) {
-    this.target = Menu.buildFromTemplate( subMenuList as ElectronMenuItem[] )
+    const menu: MenuItemConstructorOptions[] = toElectronMenu( subMenuList )
+    this.target = Menu.buildFromTemplate( menu )
   }
 
   public checkEnabled( id:string ): boolean {

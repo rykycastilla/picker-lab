@@ -9,13 +9,13 @@ export abstract class Menu<T extends object = object> {
   public readonly id: string | undefined
 
   /** Item name */
-  public abstract readonly label: string
+  public abstract readonly name: string
 
   /** Content of the menu */
-  public abstract readonly submenu: Array<MenuItem<T>|Menu<T>>
+  public abstract readonly content: Array<MenuItem<T>|Menu<T>>
 
   /** Represents dependencies */
-  protected readonly context: T | undefined
+  protected readonly context: T
 
   constructor()
   constructor( id:string )
@@ -27,13 +27,15 @@ export abstract class Menu<T extends object = object> {
       string | T | undefined,
       T | undefined,
     ]
+    let context: T | undefined
     if( typeof first === 'string' ) {
       this.id = first
-      this.context = second
+      context = second
     }
     else {
-      this.context = first
+      context = first
     }
+    this.context = context ?? {} as T
   }
 
 }

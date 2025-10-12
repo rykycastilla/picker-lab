@@ -1,5 +1,5 @@
 import { AccentEmitter } from '../application/AccentEmitter'
-import { AccentEvent } from '@shared/modules/ui_color_checker/application'
+import { AccentListener } from '../application/AccentListener'
 import { EventDispatcher } from '@shared/utils/EventDispatcher'
 import { ipcRenderer } from 'electron'
 import { UI_COLOR_ACCENT_UPDATE } from '@shared/constants'
@@ -17,9 +17,4 @@ export class AccentIPCDispatcher extends EventDispatcher<AccentListener> impleme
     } )
   }
 
-}
-
-interface AccentListener {
-  type: 'accent'
-  handle( event:AccentEvent ): Promise<void> | void
 }

@@ -48,4 +48,11 @@ export abstract class WindowManager {
     return WindowManager.store.activeWindows
   }
 
+  /**
+   * Current focused window
+   */
+  public static get focusedWindow(): BrowserWindow | null {
+    return WindowManager.store.focusedWindow
+  }
+
 }

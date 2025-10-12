@@ -1,11 +1,14 @@
-import { AccentEvent } from '@shared/modules/ui_color_checker/application'
 import { AccentService } from '@/modules/ui_color_checker/application'
 import { ApiController } from '../application/ApiController'
+import { ColorSaverEmitter } from '@/modules/color/application'
 import { FullScreenRef } from '@/modules/full_screen/application'
 import { ISqlite } from '@shared/modules/sqlite/application'
 
 export function createApiController(
-  accentService:AccentService, fullScreenRef:FullScreenRef, sqlite:ISqlite,
+  accentService: AccentService,
+  fullScreenRef: FullScreenRef,
+  sqlite: ISqlite,
+  colorSaverEmitter: ColorSaverEmitter,
 ): ApiController {
 
   return {
@@ -18,12 +21,14 @@ export function createApiController(
       return accentService.value
     },
 
-    addEventListener( type:'accent', handle:( event:AccentEvent ) => Promise<void>|void ) {
-      accentService.addEventListener( type, handle )
+    addEventListener( type:string, handle:any ) {
+      if( type === 'accent' ) { accentService.addEventListener( type, handle ) }
+      else if( type === 'should-save-color' ) { colorSaverEmitter.addEventListener( type, handle ) }
     },
 
-    removeEventListener( type:'accent', handle:( event:AccentEvent ) => Promise<void>|void ) {
-      accentService.removeEventListener( type, handle )
+    removeEventListener( type:string, handle:any ) {
+      if( type === 'accent' ) { accentService.removeEventListener( type, handle ) }
+      else if( type === 'should-save-color' ) { colorSaverEmitter.removeEventListener( type, handle ) }
     },
 
     sqlite: {

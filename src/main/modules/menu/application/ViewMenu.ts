@@ -6,9 +6,9 @@ import { StandardMenuItem } from '../domain/StandardMenuItem'
 
 export class ViewMenu extends Menu {
 
-  public readonly label = 'View'
+  public readonly name = 'View'
 
-  public readonly submenu = [
+  public readonly content = [
     ... DEVELOPMENT ? [
       new StandardMenuItem( Role.RELOAD ),
       new StandardMenuItem( Role.TOGGLE_DEV_TOOLS ),

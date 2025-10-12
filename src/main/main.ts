@@ -1,5 +1,6 @@
 import { app } from 'electron'
 import { ElectronAppMenuSetter, ElectronMenu } from '@/modules/menu/infrastructure'
+import { IPCColorSaver } from '@/modules/color/infrastructure'
 import { Platform, PlatformService } from '@/utils/Platform'
 import { runAppMenuService } from '@/modules/menu/application'
 import { runColorCheckerService } from '@/modules/ui_color_checker/infrastructure'
@@ -13,7 +14,8 @@ async function main() {
 
   // Setting App Menu
   const appMenuSetter = new ElectronAppMenuSetter()
-  runAppMenuService( ElectronMenu, appMenuSetter )
+  const colorSaver = new IPCColorSaver()
+  runAppMenuService( ElectronMenu, appMenuSetter, { colorSaver } )
 
   // Creating first window
   await WindowManager.launch()

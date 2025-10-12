@@ -1,3 +1,3 @@
 export class Separator {
-  public readonly type = 'separator'
+  protected readonly token = 'SEPARATOR'
 }
