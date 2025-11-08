@@ -2,9 +2,16 @@ import SectionList, { Item } from '@/components/SectionList'
 import { Color } from '@/modules/palette/domain'
 import { ReactElement, useMemo } from 'react'
 import { useMainPalette } from '@/contexts/palette'
+import { useSectionMode } from '@/contexts/view'
 
-const MainWorkingPaletteSection = (): ReactElement => {
+interface ColorPaletteSectionListProps {
+  type?: 'list' | 'grid'
+}
 
+const ColorPaletteSectionList = ( props:ColorPaletteSectionListProps ): ReactElement => {
+
+  const sectionMode = useSectionMode()
+  const { type = sectionMode } = props
   const colorList = useMainPalette()
 
   const content = useMemo<Item[]>( () => {
@@ -18,6 +25,7 @@ const MainWorkingPaletteSection = (): ReactElement => {
   return (
     <SectionList
       title="Color Palette"
+      type={ type }
       content={ content }
       thumbnail={ ( backgroundColor:string ) => (
         <div
@@ -32,4 +40,4 @@ const MainWorkingPaletteSection = (): ReactElement => {
 
 }
 
-export default MainWorkingPaletteSection
+export default ColorPaletteSectionList

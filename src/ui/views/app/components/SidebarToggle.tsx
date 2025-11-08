@@ -5,7 +5,7 @@ import { TITLE_BAR_HEIGHT } from '@shared/constants'
 import { TRAFFIC_LIGHTS_PLACEHOLDER, WINDOW_BLUR_UI_OPACITY } from '@/constants'
 import { useFullScreen } from '@/hooks/full_screen'
 import { useSidebarOpen } from '@/contexts/sidebar_layout'
-import { useWindowDragArea } from '../hooks/window_drag_area'
+import { useWindowDragArea } from '@/hooks/window_drag_area'
 import { useWindowFocus } from '@/hooks/window_focus'
 import './SidebarToggle.css'
 

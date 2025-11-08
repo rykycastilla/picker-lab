@@ -35,7 +35,7 @@ const SidebarItem = ( props:SidebarItemsProps ): ReactElement => {
       <ReactSVG
         src={ icon }
         className="sidebar-item-icon w-4 h-4 opacity-80 shrink-0"
-        style={ { [ '--color' ]:accentColor } as object } />
+        style={ { color:accentColor } as object } />
       <span>{ name }</span>
     </Link>
   )

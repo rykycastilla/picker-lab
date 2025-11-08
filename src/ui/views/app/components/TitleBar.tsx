@@ -1,7 +1,8 @@
 import SidebarTitleButtonsPlaceholder from './SidebarTitleButtonsPlaceholder'
 import { ReactElement } from 'react'
 import { TITLE_BAR_HEIGHT } from '@shared/constants'
-import { useWindowDragArea } from '../hooks/window_drag_area'
+import { useSidebarOpen } from '@/contexts/sidebar_layout'
+import { useWindowDragArea } from '@/hooks/window_drag_area'
 import { useWindowFocus } from '@/hooks/window_focus'
 import { WORK_AREA_TITLE_BAR } from '@/constants'
 
@@ -11,11 +12,14 @@ interface TitleBarProps {
 }
 
 const TitleBar = ( props:TitleBarProps ): ReactElement => {
+
   const { titleButtonsIncluded, titleButtonsAmount } = props
   const draggableRef = useWindowDragArea<HTMLDivElement>()
   const hasFocus = useWindowFocus()
   const darkBgColor = hasFocus ? 'rgb( 60, 55, 55 )' : 'rgb( 50, 45, 45 )'
   const lightBgColor = hasFocus ? 'rgb( 244, 240, 240 )' : 'rgb( 233, 230, 229 )'
+  const isOpen = useSidebarOpen()
+
   return (
     <div
       ref={ draggableRef }
@@ -29,10 +33,14 @@ const TitleBar = ( props:TitleBarProps ): ReactElement => {
         { titleButtonsIncluded && (
           <SidebarTitleButtonsPlaceholder buttonsAmount={ titleButtonsAmount } />
         ) }
-        <div id={ WORK_AREA_TITLE_BAR } className="flex items-center gap-2" />
+        <div
+          id={ WORK_AREA_TITLE_BAR }
+          className="flex items-center gap-2"
+          style={ { paddingLeft:( isOpen ? '1rem' : '0.5rem' ) } } />
       </div>
     </div>
   )
+
 }
 
 export default TitleBar
