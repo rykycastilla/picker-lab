@@ -1,5 +1,5 @@
 export interface MenuService {
-  checkEnabled( id:string ): boolean
-  enable( id:string ): void
-  disable( id:string ): void
+  checkEnabled( item:string ): boolean
+  enable( item:string ): void
+  disable( item:string ): void
 }

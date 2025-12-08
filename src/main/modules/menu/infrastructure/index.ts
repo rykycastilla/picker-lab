@@ -1,2 +1,1 @@
-export { ElectronAppMenuSetter } from './ElectronAppMenuSetter'
-export { ElectronMenu } from './ElectronMenu'
+export { runAppMenuService } from './run_app_menu_service'

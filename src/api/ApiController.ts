@@ -1,6 +1,7 @@
 import { AccentListener } from './modules/ui_color_checker/application'
 import { EventDispatcher } from '@shared/utils/EventDispatcher'
 import { ISqlite } from '@shared/modules/sqlite/application'
+import { MenuService } from '@shared/modules/menu/application'
 import { PublicOf } from '@shared/types/PublicOf'
 import { ShouldSaveColorListener } from './modules/color/application'
 
@@ -21,6 +22,11 @@ export interface ApiController extends SystemEmitter {
    * Utility to use the SQLite database
    */
   sqlite: ISqlite
+
+  /**
+   * Utility to handle menu items of the app
+   */
+  menuService: MenuService
 
 }
 

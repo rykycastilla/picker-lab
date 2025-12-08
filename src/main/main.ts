@@ -1,8 +1,6 @@
 import { app } from 'electron'
-import { ElectronAppMenuSetter, ElectronMenu } from '@/modules/menu/infrastructure'
-import { IPCColorSaver } from '@/modules/color/infrastructure'
 import { Platform, PlatformService } from '@/utils/Platform'
-import { runAppMenuService } from '@/modules/menu/application'
+import { runAppMenuService } from '@/modules/menu/infrastructure'
 import { runColorCheckerService } from '@/modules/ui_color_checker/infrastructure'
 import { runSqliteApiManagerService } from '@/modules/sqlite/infrastructure'
 import { WindowManager } from '@/utils/infrastructure/WindowManager'
@@ -13,9 +11,7 @@ async function main() {
   runSqliteApiManagerService()
 
   // Setting App Menu
-  const appMenuSetter = new ElectronAppMenuSetter()
-  const colorSaver = new IPCColorSaver()
-  runAppMenuService( ElectronMenu, appMenuSetter, { colorSaver } )
+  runAppMenuService()
 
   // Creating first window
   await WindowManager.launch()

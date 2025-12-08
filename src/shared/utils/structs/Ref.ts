@@ -1,4 +1,4 @@
-/***
+/**
  * Create dynamic references of any type.
  */
 export class Ref<T> {

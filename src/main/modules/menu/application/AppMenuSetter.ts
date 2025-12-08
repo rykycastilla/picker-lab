@@ -1,4 +1,4 @@
-import { MenuService } from './MenuService'
+import { MenuService } from '../application/MenuService'
 
 /**
  * @template T  SpecificMenuServiceImpl

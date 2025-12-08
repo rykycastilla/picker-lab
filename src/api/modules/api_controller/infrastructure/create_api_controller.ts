@@ -3,12 +3,15 @@ import { ApiController } from '../application/ApiController'
 import { ColorSaverEmitter } from '@/modules/color/application'
 import { FullScreenRef } from '@/modules/full_screen/application'
 import { ISqlite } from '@shared/modules/sqlite/application'
+import { MenuItemId } from '@shared/modules/menu/domain'
+import { MenuService } from '@shared/modules/menu/application'
 
 export function createApiController(
   accentService: AccentService,
   fullScreenRef: FullScreenRef,
   sqlite: ISqlite,
   colorSaverEmitter: ColorSaverEmitter,
+  menuService: MenuService,
 ): ApiController {
 
   return {
@@ -47,6 +50,22 @@ export function createApiController(
 
       all<T extends object>( query:string, args:object ): Promise<T[]> {
         return sqlite.all<T>( query, args )
+      },
+
+    },
+
+    menuService: {
+
+      checkEnabled( item:MenuItemId ): Promise<boolean> {
+        return menuService.checkEnabled( item )
+      },
+
+      async enable( item:MenuItemId ) {
+        await menuService.enable( item )
+      },
+
+      async disable( item:MenuItemId ) {
+        await menuService.disable( item )
       },
 
     },

@@ -6,6 +6,7 @@ import { contextBridge } from 'electron'
 import { createApiController } from '@/modules/api_controller/infrastructure'
 import { FullScreenIPCDispatcher } from '@/modules/full_screen/infrastructure'
 import { FullScreenRef } from '@/modules/full_screen/application'
+import { WindowMenuService } from '@/modules/menu/infrastructure'
 import { SqliteIpcCommunicator } from '@/modules/sqlite/infrastructure'
 
 export async function main() {
@@ -24,9 +25,12 @@ export async function main() {
   // Setting Sqlite module
   const sqlite = new SqliteIpcCommunicator()
 
+  // Setting app menu service
+  const menuService = new WindowMenuService()
+
   // Setting API controller
   const api: ApiController = createApiController(
-    accentService, fullScreenRef, sqlite, colorSaverEmitter,
+    accentService, fullScreenRef, sqlite, colorSaverEmitter, menuService,
   )
   contextBridge.exposeInMainWorld( 'api', api )
 
