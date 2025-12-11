@@ -1,4 +1,4 @@
-import { HSL } from '../domain/HSL'
+import { HSL } from '@/modules/color_codecs/domain'
 import { SelectedColorContext } from '../context'
 import { useContext } from 'react'
 

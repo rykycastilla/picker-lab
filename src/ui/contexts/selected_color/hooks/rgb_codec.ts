@@ -1,4 +1,4 @@
-import { RgbCodec } from '../application/RgbCodec'
+import { RgbCodec } from '@/modules/color_codecs/application/RgbCodec'
 import { useMemo } from 'react'
 
 interface RgbCodecConstructor<T> {

@@ -5,6 +5,7 @@ interface ListContainerProps {
   title: string
   content: Item[]
   thumbnail( target:string ): ReactElement
+  onClick?( item:Item ): void
 }
 
 export interface ListContainer {

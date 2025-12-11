@@ -1,6 +1,5 @@
 import { createContext } from 'react'
-import { HSL } from './domain/HSL'
-import { RGB } from './domain/RGB'
+import { HSL, RGB } from '@/modules/color_codecs/domain'
 
 export interface SelectedColorContext {
   rgb: RGB

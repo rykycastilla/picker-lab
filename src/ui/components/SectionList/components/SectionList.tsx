@@ -9,13 +9,20 @@ interface SectionListProps {
   type?: 'list' | 'grid'
   content: Item[]
   thumbnail( target:string ): ReactElement
+  onClick?( item:Item ): void
 }
 
 const SectionList = ( props:SectionListProps ): ReactElement | null => {
-  const { title, type = 'list', content, thumbnail } = props
+  const { title, type = 'list', content, thumbnail, onClick:handleClick } = props
   if( content.length === 0 ) { return null }
   const Container: ListContainer = type === 'grid' ? GridList : List
-  return <Container title={ title } content={ content } thumbnail={ thumbnail } />
+  return (
+    <Container
+      title={ title }
+      content={ content }
+      thumbnail={ thumbnail }
+      onClick={ handleClick } />
+  )
 }
 
 export default SectionList

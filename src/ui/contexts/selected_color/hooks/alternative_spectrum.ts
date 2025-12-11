@@ -1,5 +1,5 @@
-import { RGB } from '../domain/RGB'
-import { RgbCodec } from '../application/RgbCodec'
+import { RGB } from '@/modules/color_codecs/domain'
+import { RgbCodec } from '@/modules/color_codecs/application'
 import { useMemo } from 'react'
 
 /**

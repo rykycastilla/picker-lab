@@ -15,7 +15,7 @@ const Lab = (): ReactElement | null => {
         <ColorIndicator />
       </TitleBarPortal>
       <ColorInput />
-      <ColorPaletteSectionList type="list" />
+      <ColorPaletteSectionList type="list" max={ 5 } />
     </div>
   )
 }

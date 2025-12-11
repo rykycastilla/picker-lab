@@ -1,7 +1,6 @@
 import { compareRgb } from '../infrastructure/compare_rgb'
-import { HSL } from '../domain/HSL'
-import { RGB } from '../domain/RGB'
-import { RgbCodec } from '../application/RgbCodec'
+import { HSL, RGB } from '@/modules/color_codecs/domain'
+import { RgbCodec } from '@/modules/color_codecs/application'
 import { useCallback, useMemo } from 'react'
 import { useStorageState } from '@/hooks/storage_state'
 

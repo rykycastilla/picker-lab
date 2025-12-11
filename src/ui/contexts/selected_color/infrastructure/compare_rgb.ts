@@ -1,4 +1,4 @@
-import { RGB } from '../domain/RGB'
+import { RGB } from '@/modules/color_codecs/domain/RGB'
 
 /**
  * Compares two RGB structs
