@@ -1,0 +1,8 @@
+.context-toast {
+  color: rgb( 60, 60, 60 );
+  display: flex;
+}
+
+.dark .context-toast {
+  color: rgb( 220, 220, 220 );
+}
