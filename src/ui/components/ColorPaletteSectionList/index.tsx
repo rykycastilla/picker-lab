@@ -5,6 +5,8 @@ import { useColorCopy } from './hooks/color_copy'
 import { useMainPalette } from '@/contexts/palette'
 import { useSectionMode } from '@/contexts/view'
 
+import { Decoration, notify, Shape } from '@/contexts/toast'
+
 interface ColorPaletteSectionListProps {
   type?: 'list' | 'grid'
   max?: number
@@ -30,7 +32,11 @@ const ColorPaletteSectionList = ( props:ColorPaletteSectionListProps ): ReactEle
     return itemList
   }, [ colorList, max ] )
 
-  const handleColorCopy = useColorCopy( colorList )
+  // Handling color copy and notifying it
+  const handleColorCopy = useColorCopy( colorList, ( name:string, code:string ) => {
+    const colorIndicator = new Decoration( Shape.CIRCLE, code )
+    notify( colorIndicator, `${ name } copied as ${ code }` )
+  } )
 
   return (
     <SectionList
