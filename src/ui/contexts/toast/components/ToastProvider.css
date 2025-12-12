@@ -1,0 +1,7 @@
+.dark .toast-provider {
+  background-color: rgba( 20, 20, 20, 0.6 );
+}
+
+.toast-provider {
+  background-color: rgba( 210, 210, 210, 0.5 );
+}
