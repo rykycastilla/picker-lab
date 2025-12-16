@@ -1,11 +1,13 @@
-import { ActionMenuItem } from '../domain/ActionMenuItem'
+import { ActionMenuItem } from '@shared/modules/menu/domain/ActionMenuItem'
 import { capitalizeFirst } from '@/utils/capitalize_first'
-import { Menu } from '../domain/Menu'
-import { MenuItem } from '../domain/MenuItem'
+import { Menu } from '@shared/modules/menu/domain/Menu'
+import { Menu as ElectronMenu } from 'electron'
+import { MenuItem } from '@shared/modules/menu/domain/MenuItem'
 import { MenuItemConstructorOptions as ElectronMenuItem } from 'electron'
-import { Role } from '../domain/Role'
-import { Separator } from '../domain/Separator'
-import { StandardMenuItem } from '../domain/StandardMenuItem'
+import { MenuSchema } from '@shared/modules/menu/domain/MenuSchema'
+import { Role } from '@shared/modules/menu/domain/Role'
+import { Separator } from '@shared/modules/menu/domain/Separator'
+import { StandardMenuItem } from '@shared/modules/menu/domain/StandardMenuItem'
 
 function resolveElectronRole( role:Role ): string {
   const roleName: string = Role[ role ]
@@ -54,8 +56,9 @@ function resolve( item:Menu|MenuItem ): ElectronMenuItem {
 }
 
 /**
- * Transforms Menu models into a valid Menu template for electron API
+ * Transforms Menu models into a valid Menu for electron API
  */
-export function toElectronMenu( menuItemList:Array<Menu|MenuItem> ): ElectronMenuItem[] {
-  return menuItemList.map( resolve )
+export function toElectronMenu( menuItemList:MenuSchema ): ElectronMenu {
+  const menu = menuItemList.map( resolve )
+  return ElectronMenu.buildFromTemplate( menu )
 }

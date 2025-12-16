@@ -6,3 +6,9 @@ export const ENABLE_MENU = 'enable-menu'
 
 /** Channel for Menu Service, disable menu item */
 export const DISABLE_MENU = 'disable-menu'
+
+/** Channel to request a context menu activation */
+export const CONTEXT_MENU = 'context-menu'
+
+/** Symbolic value for separator token */
+export const SEPARATOR = 'SEPARATOR'
