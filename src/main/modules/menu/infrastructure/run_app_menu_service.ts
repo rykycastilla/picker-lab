@@ -1,12 +1,14 @@
 import { EditMenu } from '../application/EditMenu'
 import { ElectronAppMenuSetter } from './ElectronAppMenuSetter'
+import { ElectronContextMenuManager } from './ElectronContextMenuManager'
 import { ElectronMenu } from './ElectronMenu'
 import { FileMenu } from '../application/FileMenu'
 import { IPCColorSaver } from '@/modules/color/infrastructure'
 import { MenuApiManager } from './MenuApiManager'
-import { Role } from '../domain/Role'
+import { MenuSchemaMapper } from './MenuSchemaMapper'
+import { Role } from '@shared/modules/menu/domain/Role'
 import { runMenuOwnerService } from './run_menu_owner_service'
-import { StandardMenuItem } from '../domain/StandardMenuItem'
+import { StandardMenuItem } from '@shared/modules/menu/domain/StandardMenuItem'
 import { ViewMenu } from '../application/ViewMenu'
 
 export function runAppMenuService() {
@@ -22,6 +24,8 @@ export function runAppMenuService() {
   // Setting menu
   appMenuSetter.set( menuService )
   runMenuOwnerService( menuService )
-  new MenuApiManager( menuService )
+  new MenuApiManager(
+    menuService, new ElectronContextMenuManager(), new MenuSchemaMapper(),
+  )
 
 }

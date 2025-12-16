@@ -1,5 +1,6 @@
-import { CHECK_MENU_ENABLED, DISABLE_MENU, ENABLE_MENU } from '@shared/modules/menu/constants'
+import { CHECK_MENU_ENABLED, CONTEXT_MENU, DISABLE_MENU, ENABLE_MENU } from '@shared/modules/menu/constants'
 import { ipcMain, IpcMainInvokeEvent } from 'electron'
+import { MenuSchemaDTO } from '@shared/modules/menu/application/MenuSchemaDTO'
 import { setupEventDecorators } from 'event-listener-decorators'
 
 /**
@@ -11,7 +12,7 @@ import { setupEventDecorators } from 'event-listener-decorators'
  * Provides types and functions to handle different methods from the Menu Service and set up event decorators.
  */
 
-type MenuAction = typeof CHECK_MENU_ENABLED | typeof DISABLE_MENU | typeof ENABLE_MENU
+type MenuAction = typeof CHECK_MENU_ENABLED | typeof DISABLE_MENU | typeof ENABLE_MENU | typeof CONTEXT_MENU
 type MenuEventHandler<T, U extends object> = ( event:IpcMainInvokeEvent, args:U ) => T
 
 type MainGeneric<T extends object> = [ event:IpcMainInvokeEvent, args:T ]
@@ -21,14 +22,20 @@ export interface MenuItemArgs {
   id: string
 }
 
+export interface ContextMenuArgs {
+  target: MenuSchemaDTO
+}
+
 type CheckEnabledItemMenuEvent = MenuEventOverload<typeof CHECK_MENU_ENABLED,MenuItemArgs,Promise<boolean>>
 type EnableItemMenuEvent = MenuEventOverload<typeof ENABLE_MENU,MenuItemArgs,Promise<void>>
 type DisableItemMenuEvent = MenuEventOverload<typeof DISABLE_MENU,MenuItemArgs,Promise<void>>
+type ContextMenuEvent = MenuEventOverload<typeof CONTEXT_MENU,ContextMenuArgs,Promise<string|null>>
 
 interface MenuEvent {
   ( type:Parameters<CheckEnabledItemMenuEvent>[0] ): ReturnType<CheckEnabledItemMenuEvent>
   ( type:Parameters<EnableItemMenuEvent>[0] ): ReturnType<EnableItemMenuEvent>
   ( type:Parameters<DisableItemMenuEvent>[0] ): ReturnType<DisableItemMenuEvent>
+  ( type:Parameters<ContextMenuEvent>[0] ): ReturnType<ContextMenuEvent>
 }
 
 /**

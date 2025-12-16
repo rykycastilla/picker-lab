@@ -1,4 +1,4 @@
-import { ActionMenuItem } from '../domain/ActionMenuItem'
+import { ActionMenuItem } from '@shared/modules/menu/domain/ActionMenuItem'
 import { Dependencies } from './Dependencies'
 import { MenuItemId } from '@shared/modules/menu/domain/MenuItemId'
 

@@ -3,6 +3,7 @@ import { AccentIPCDispatcher } from '@/modules/ui_color_checker/infrastructure'
 import { AccentService } from '@/modules/ui_color_checker/application'
 import { ColorSaverIPCDispatcher } from '@/modules/color/infrastructure'
 import { contextBridge } from 'electron'
+import { ContextMenuIPCRequester } from '@/modules/menu/infrastructure'
 import { createApiController } from '@/modules/api_controller/infrastructure'
 import { FullScreenIPCDispatcher } from '@/modules/full_screen/infrastructure'
 import { FullScreenRef } from '@/modules/full_screen/application'
@@ -28,9 +29,12 @@ export async function main() {
   // Setting app menu service
   const menuService = new WindowMenuService()
 
+  // Setting context menu handler
+  const contextMenuRequester = new ContextMenuIPCRequester()
+
   // Setting API controller
   const api: ApiController = createApiController(
-    accentService, fullScreenRef, sqlite, colorSaverEmitter, menuService,
+    accentService, fullScreenRef, sqlite, colorSaverEmitter, menuService, contextMenuRequester,
   )
   contextBridge.exposeInMainWorld( 'api', api )
 

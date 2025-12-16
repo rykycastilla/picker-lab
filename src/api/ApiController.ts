@@ -1,4 +1,5 @@
 import { AccentListener } from './modules/ui_color_checker/application'
+import { ContextMenuRequester } from '@shared/modules/menu/application'
 import { EventDispatcher } from '@shared/utils/EventDispatcher'
 import { ISqlite } from '@shared/modules/sqlite/application'
 import { MenuService } from '@shared/modules/menu/application'
@@ -27,6 +28,11 @@ export interface ApiController extends SystemEmitter {
    * Utility to handle menu items of the app
    */
   menuService: MenuService
+
+  /**
+   * Handle context menus using raw data (**DTO**)
+   */
+  contextMenuRequester: ContextMenuRequester
 
 }
 

@@ -1,7 +1,7 @@
 import { Color } from '../domain/Color'
 import { ColorNameService } from '@/modules/name/application'
 import { ColorSet } from './ColorSet'
-import { IdGenerator } from './IdGenerator'
+import { IdGenerator } from '@/modules/id/application'
 
 /**
  * Represents the main working Area Manager.
