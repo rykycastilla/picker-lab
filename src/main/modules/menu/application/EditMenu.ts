@@ -1,7 +1,7 @@
-import { Menu } from '../domain/Menu'
-import { Role } from '../domain/Role'
-import { Separator } from '../domain/Separator'
-import { StandardMenuItem } from '../domain/StandardMenuItem'
+import { Menu } from '@shared/modules/menu/domain/Menu'
+import { Role } from '@shared/modules/menu/domain/Role'
+import { Separator } from '@shared/modules/menu/domain/Separator'
+import { StandardMenuItem } from '@shared/modules/menu/domain/StandardMenuItem'
 
 export class EditMenu extends Menu {
 

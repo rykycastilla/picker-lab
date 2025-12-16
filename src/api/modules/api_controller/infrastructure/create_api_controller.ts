@@ -1,9 +1,11 @@
 import { AccentService } from '@/modules/ui_color_checker/application'
 import { ApiController } from '../application/ApiController'
 import { ColorSaverEmitter } from '@/modules/color/application'
+import { ContextMenuRequester } from '@shared/modules/menu/application'
 import { FullScreenRef } from '@/modules/full_screen/application'
 import { ISqlite } from '@shared/modules/sqlite/application'
 import { MenuItemId } from '@shared/modules/menu/domain'
+import { MenuSchemaDTO } from '@shared/modules/menu/application/MenuSchemaDTO'
 import { MenuService } from '@shared/modules/menu/application'
 
 export function createApiController(
@@ -12,6 +14,7 @@ export function createApiController(
   sqlite: ISqlite,
   colorSaverEmitter: ColorSaverEmitter,
   menuService: MenuService,
+  contextMenuRequester: ContextMenuRequester,
 ): ApiController {
 
   return {
@@ -32,6 +35,14 @@ export function createApiController(
     removeEventListener( type:string, handle:any ) {
       if( type === 'accent' ) { accentService.removeEventListener( type, handle ) }
       else if( type === 'should-save-color' ) { colorSaverEmitter.removeEventListener( type, handle ) }
+    },
+
+    contextMenuRequester: {
+
+      async invoke( schema:MenuSchemaDTO ): Promise<string|null> {
+        return contextMenuRequester.invoke( schema )
+      },
+
     },
 
     sqlite: {
