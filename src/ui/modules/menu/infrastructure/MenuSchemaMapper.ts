@@ -33,9 +33,9 @@ export class MenuSchemaMapper implements IMenuSchemaMapper {
    * @param registerAction  Allows external code to transform the **DTO** and register its non-serializable action for later invocation
    */
   private prepareActionMenuItemDTO( item:ActionMenuItem, registerAction:RegisterActionFunction ): ActionMenuItemDTO {
-    const { id, name, shortcuts } = item
+    const { id, enabled, name, shortcuts } = item
     const select = () => item.onSelect()
-    return registerAction( { id, name, shortcuts }, select )
+    return registerAction( { id, enabled, name, shortcuts }, select )
   }
 
   /**
