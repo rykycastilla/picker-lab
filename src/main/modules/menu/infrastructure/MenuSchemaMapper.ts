@@ -35,10 +35,11 @@ export class MenuSchemaMapper implements MenuMapper<ContextMenuTarget> {
    * Builds Action buttons of the menu
    */
   private buildActionMenuItem( actionMenuItemDTO:ActionMenuItemDTO, context:MenuDependencies ): MenuItem {
-    const { id, name, shortcuts } = actionMenuItemDTO
+    const { id, enabled, name, shortcuts } = actionMenuItemDTO
     // Declaring action button
     return new class extends ActionMenuItem<MenuDependencies> {
       public readonly id: string = id
+      public readonly enabled: boolean | undefined = enabled
       public readonly name: string = name
       public readonly shortcuts: string[] | undefined = shortcuts
       // When the action button is selected, notify its id

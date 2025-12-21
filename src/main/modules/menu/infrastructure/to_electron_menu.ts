@@ -26,11 +26,11 @@ function resolveAccelerator( shortcuts:string[] ): string {
 
 function resolveItem( item:MenuItem ): ElectronMenuItem {
   if( item instanceof ActionMenuItem ) {
-    const { id, name:label, shortcuts } = item
+    const { id, enabled, name:label, shortcuts } = item
     const accelerator: string | undefined = shortcuts === undefined
       ? undefined
       : resolveAccelerator( shortcuts )
-    return { id, label, accelerator, click() { item.onSelect() } }
+    return { id, enabled, label, accelerator, click() { item.onSelect() } }
   }
   if( item instanceof StandardMenuItem ) {
     const { id, role:roleValue } = item

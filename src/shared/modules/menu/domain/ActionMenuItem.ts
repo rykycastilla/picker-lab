@@ -5,6 +5,7 @@
 export abstract class ActionMenuItem<T extends object = object> {
 
   public readonly id: string | undefined
+  public readonly enabled: boolean | undefined
 
   /** Item name */
   public abstract readonly name: string
